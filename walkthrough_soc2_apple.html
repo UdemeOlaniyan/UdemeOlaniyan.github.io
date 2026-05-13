@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple SOC 2 Readiness — Walkthrough</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+  :root {
+    --bg: #0c0d0f; --panel: #181c22; --border: #2a3040; --surface: #131519;
+    --gold: #c9a84c; --gold-dim: rgba(201,168,76,0.15);
+    --accent: #c9a84c;
+    --accent-dim: #c9a84c22;
+    --text: #edeae0; --muted: #7a8090;
+    --headline: 'Syne', sans-serif; --body: 'DM Sans', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--body); min-height: 100vh; overflow-x: hidden; }
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image: linear-gradient(rgba(201,168,76,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.02) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  /* TOP BAR */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(12,13,15,0.94); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border); padding: 0 32px; height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 16px; }
+  .back-btn {
+    color: var(--gold); text-decoration: none; font-size: 12px; font-weight: 600;
+    display: flex; align-items: center; gap: 6px;
+    background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.3);
+    padding: 4px 12px; border-radius: 20px; transition: all 0.2s;
+  }
+  .back-btn:hover { background: rgba(201,168,76,0.25); }
+  .topbar-title { font-family: var(--headline); font-size: 14px; font-weight: 700; color: var(--text); }
+  .topbar-sub { font-size: 11px; color: var(--muted); }
+  .week-counter { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--accent); }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    position: fixed; top: 56px; left: 0; right: 0; z-index: 99;
+    height: 3px; background: var(--border);
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--gold), var(--accent));
+    transition: width 0.4s ease;
+  }
+
+  /* WEEK DOTS */
+  .week-dots {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 10px; z-index: 100;
+    background: rgba(12,13,15,0.8); border: 1px solid var(--border);
+    padding: 8px 16px; border-radius: 30px; backdrop-filter: blur(10px);
+  }
+  .dot {
+    width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; color: var(--muted); cursor: pointer;
+    transition: all 0.2s; font-family: var(--headline);
+  }
+  .dot.active { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+  .dot:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* SLIDE */
+  .slide-wrap { padding: 80px 32px 100px; min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; }
+  .slide { max-width: 900px; width: 100%; position: relative; z-index: 1; }
+
+  /* WEEK HEADER */
+  .week-header { margin-bottom: 36px; }
+  .week-badge {
+    display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px;
+    background: var(--accent-dim); border: 1px solid var(--accent)55;
+    color: var(--accent); padding: 5px 14px; border-radius: 20px;
+    font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .week-title { font-family: var(--headline); font-size: clamp(26px,4vw,42px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 10px; color: var(--text); }
+  .week-goal {
+    font-size: 15px; color: #b8a87a; font-style: italic; line-height: 1.6;
+    border-left: 2px solid var(--gold); padding-left: 14px; max-width: 680px;
+  }
+
+  /* CONTENT GRID */
+  .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .content-card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 12px;
+    padding: 22px; position: relative; overflow: hidden;
+  }
+  .content-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--gold), var(--accent)); }
+  .card-label { font-size: 10px; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+  .card-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .task-list { list-style: none; }
+  .task-list li { font-size: 13px; color: var(--muted); padding: 7px 0; border-bottom: 1px solid rgba(42,48,64,0.5); line-height: 1.5; display: flex; align-items: flex-start; gap: 8px; }
+  .task-list li:last-child { border-bottom: none; }
+  .task-list li::before { content: '›'; color: var(--accent); font-size: 16px; font-weight: 700; flex-shrink: 0; margin-top: -1px; }
+
+  .deliverable { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(42,48,64,0.5); font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .deliverable:last-child { border-bottom: none; }
+  .check { font-size: 14px; flex-shrink: 0; }
+
+  /* META BAR */
+  .meta-bar {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 20px; display: flex; gap: 24px; align-items: center; margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .meta-item { display: flex; align-items: center; gap: 8px; }
+  .meta-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .meta-value { font-size: 12px; color: var(--text); font-weight: 600; }
+  .meta-chip { background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); padding: 2px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+
+  /* NAV ARROWS */
+  .nav-arrows { display: flex; gap: 12px; margin-top: 32px; }
+  .nav-btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px;
+    border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer;
+    border: 1px solid var(--border); background: var(--panel); color: var(--muted);
+    font-family: var(--body); transition: all 0.2s;
+  }
+  .nav-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .nav-btn.primary { background: var(--gold-dim); border-color: rgba(201,168,76,0.4); color: var(--gold); }
+  .nav-btn.primary:hover { background: rgba(201,168,76,0.25); }
+
+  /* INTRO SLIDE */
+  .intro-slide { text-align: center; padding: 48px 0; }
+  .intro-badge {
+    display: inline-block; margin-bottom: 24px;
+    background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.35); color: var(--gold);
+    padding: 6px 16px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  }
+  .intro-title { font-family: var(--headline); font-size: clamp(32px,5vw,56px); font-weight: 800; letter-spacing: -2px; line-height: 1.05; margin-bottom: 16px;
+    background: linear-gradient(135deg, #edeae0 0%, #c9a84c 50%, #c9a84c 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .intro-sub { font-size: 16px; color: var(--muted); max-width: 560px; margin: 0 auto 32px; line-height: 1.7; }
+  .intro-chips { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px; }
+  .intro-chip { background: var(--panel); border: 1px solid var(--border); color: var(--muted); padding: 5px 14px; border-radius: 6px; font-size: 12px; font-weight: 500; }
+  .intro-weeks { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; max-width: 640px; margin: 0 auto 36px; }
+  .intro-week { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 12px; text-align: left; cursor: pointer; transition: border-color 0.2s; }
+  .intro-week:hover { border-color: var(--gold); }
+  .intro-week-num { font-size: 10px; color: var(--gold); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .intro-week-title { font-size: 12px; color: var(--text); font-weight: 600; }
+  .start-btn {
+    display: inline-flex; align-items: center; gap: 10px; padding: 12px 28px;
+    background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.4); color: var(--gold);
+    border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer;
+    font-family: var(--body); transition: all 0.2s; text-decoration: none;
+  }
+  .start-btn:hover { background: rgba(201,168,76,0.25); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="index.html" class="back-btn">&#x2190; Portfolio</a>
+    <div>
+      <div class="topbar-title">Apple SOC 2 Readiness</div>
+      <div class="topbar-sub">AICPA SOC 2 TSC &middot; Apple Inc.</div>
+    </div>
+  </div>
+  <div class="week-counter" id="weekCounter">Overview</div>
+</div>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+<div class="slide-wrap" id="slideWrap">
+  <div class="slide" id="slideContent">
+    <!-- rendered by JS -->
+  </div>
+</div>
+
+<div class="week-dots" id="weekDots"></div>
+
+<script>
+const TITLE = 'Apple SOC 2 Readiness';
+const SUBTITLE = 'Evaluating Apple ID, iCloud, App Store Connect & Developer APIs against AICPA Trust Services Criteria';
+const FRAMEWORK = 'AICPA SOC 2 TSC';
+const COMPANY = 'Apple Inc.';
+const SECTOR = 'Global Technology';
+
+const weeks = [{
+  num: 1,
+  title: 'Scoping & Governance',
+  goal: "Define Apple's SOC 2 audit scope and governance structure.",
+  tasks: `<li>Identify Apple services in SOC 2 scope: Apple ID & IAM, iCloud Storage & Backup, App Store Connect, Developer APIs & Integrations</li><li>Define system boundaries: Security (IAM, encryption, access controls), Availability (uptime, redundancy, IR), Confidentiality (user data, backups, metadata)</li><li>Create RACI Matrix: Cloud Security Engineer, Identity & Access Architect, Privacy & Legal Officer, GRC & Audit Lead</li><li>Document Apple's Shared Responsibility Model: Apple responsibilities vs. developers/users</li><li>Establish audit timeline and evidence collection plan</li>`,
+  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>SOC 2 Scope Summary Document</div><div class="deliverable"><span class="check">&#x2705;</span>Shared Responsibility Model Diagram</div><div class="deliverable"><span class="check">&#x2705;</span>Project RACI Chart</div>`
+},
+{
+  num: 2,
+  title: 'Risk Assessment & Control Mapping',
+  goal: 'Identify risks and map controls to SOC 2 Trust Service Criteria.',
+  tasks: `<li>Perform SOC 2-aligned Risk Assessment across Apple's cloud services</li><li>Identify risks: Unauthorized Apple ID access → Confidentiality; API token misuse → Security; iCloud outage → Availability</li><li>Map Apple controls to TSC: Apple ID MFA → CC6.1, CC6.6; End-to-end encryption → CC6.1, C1.2; Global redundancy → A1.1, A1.2</li><li>Build initial Control Register with control owners and implementation status</li><li>Assign risk ratings (High/Medium/Low) and document risk treatment decisions</li>`,
+  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Risk Register (SOC 2-aligned)</div><div class="deliverable"><span class="check">&#x2705;</span>TSC Control Mapping Matrix</div><div class="deliverable"><span class="check">&#x2705;</span>Initial Control Register</div>`
+},
+{
+  num: 3,
+  title: 'Policies & Cloud Control Design',
+  goal: "Document Apple's SOC 2 control environment through enterprise-grade policies.",
+  tasks: `<li>Draft Access Control Policy: MFA for all privileged Apple ID accounts, RBAC enforcement</li><li>Draft Encryption & Key Management Policy: iCloud data at rest and in transit, HSM usage</li><li>Draft Data Retention & Confidentiality Policy: user data handling, metadata controls</li><li>Design control implementation examples: restrict API scopes using least privilege, enforce TLS 1.3</li><li>Begin evidence collection: screenshots, configuration exports, audit reports</li>`,
+  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>SOC 2 Policy Pack (3 enterprise policies)</div><div class="deliverable"><span class="check">&#x2705;</span>Control Design Sheet</div><div class="deliverable"><span class="check">&#x2705;</span>Control Implementation Matrix</div>`
+},
+{
+  num: 4,
+  title: 'Monitoring, Logging & Alerting',
+  goal: 'Establish continuous monitoring and incident awareness across Apple services.',
+  tasks: `<li>Monitor Apple ID authentication logs and iCloud access/download activity</li><li>Track Developer API usage patterns and anomalies</li><li>Configure alerts for: multiple failed login attempts, suspicious API behavior, unexpected service degradation</li><li>Simulate escalation workflow: Alert → Security Operations → GRC → Executive Review</li><li>Build Evidence Binder: log samples, alert screenshots, escalation records</li>`,
+  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Monitoring Checklist</div><div class="deliverable"><span class="check">&#x2705;</span>Sample Alert & Escalation Logs</div><div class="deliverable"><span class="check">&#x2705;</span>Evidence Binder (Logs & Reports)</div>`
+},
+{
+  num: 5,
+  title: 'Testing & Audit Preparation',
+  goal: 'Validate SOC 2 controls and prepare for audit walkthrough.',
+  tasks: `<li>Conduct mock internal audit: validate IAM and RBAC enforcement, confirm encryption controls</li><li>Review availability SLAs and uptime metrics against A1.1/A1.2 criteria</li><li>Perform auditor walkthrough simulation — walk through each TSC category with evidence</li><li>Review documentation quality: version control, control ownership, evidence traceability</li><li>Identify and remediate any control gaps discovered during testing</li>`,
+  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Control Testing Summary Sheet</div><div class="deliverable"><span class="check">&#x2705;</span>SOC 2 Audit Readiness Checklist</div><div class="deliverable"><span class="check">&#x2705;</span>Audit Evidence Folder Index</div>`
+},
+{
+  num: 6,
+  title: 'Final Reporting & Executive Briefing',
+  goal: "Deliver Apple's SOC 2 readiness package and executive presentation.",
+  tasks: `<li>Finalize SOC 2 Readiness Report: risk overview, controls implemented, gaps remediated</li><li>Create Executive Presentation: SOC 2 journey, control highlights, continuous compliance roadmap</li><li>Summarize findings: overall readiness percentage, open items, recommended next steps</li><li>Submit final internship portfolio with all deliverables organized by week</li><li>Present to simulated Apple GRC leadership panel</li>`,
+  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Final SOC 2 Readiness Report</div><div class="deliverable"><span class="check">&#x2705;</span>Executive Presentation Deck (5 slides)</div><div class="deliverable"><span class="check">&#x2705;</span>Project Portfolio Folder (complete)</div>`
+}];
+
+let current = 0; // 0 = intro, 1–6 = weeks
+
+function renderIntro() {
+  const weekList = weeks.map((w,i) => `
+    <div class="intro-week" onclick="goTo(${i+1})">
+      <div class="intro-week-num">Week ${i+1}</div>
+      <div class="intro-week-title">${w.title}</div>
+    </div>`).join('');
+  return `
+    <div class="intro-slide">
+      <div class="intro-badge">6-Week Internship Project</div>
+      <div class="intro-title">${TITLE}</div>
+      <div class="intro-sub">${SUBTITLE}</div>
+      <div class="intro-chips">
+        <span class="intro-chip">&#x1F4CB; ${FRAMEWORK}</span>
+        <span class="intro-chip">&#x1F3E2; ${COMPANY}</span>
+        <span class="intro-chip">&#x1F4CC; ${SECTOR}</span>
+        <span class="intro-chip">&#x23F1; 6 Weeks</span>
+      </div>
+      <div class="intro-weeks">${weekList}</div>
+      <button class="start-btn" onclick="goTo(1)">Begin Walkthrough &#x2192;</button>
+    </div>`;
+}
+
+function renderWeek(w) {
+  return `
+    <div class="meta-bar">
+      <div class="meta-item"><span class="meta-label">Framework</span>&nbsp;<span class="meta-chip">${FRAMEWORK}</span></div>
+      <div class="meta-item"><span class="meta-label">Organization</span>&nbsp;<span class="meta-value">${COMPANY}</span></div>
+      <div class="meta-item"><span class="meta-label">Sector</span>&nbsp;<span class="meta-value">${SECTOR}</span></div>
+    </div>
+    <div class="week-header">
+      <div class="week-badge">&#x1F4C5; Week ${w.num} of 6</div>
+      <div class="week-title">${w.title}</div>
+      <div class="week-goal">&#x1F3AF; Goal: ${w.goal}</div>
+    </div>
+    <div class="content-grid">
+      <div class="content-card">
+        <div class="card-label">Tasks &amp; Activities</div>
+        <ul class="task-list">${w.tasks}</ul>
+      </div>
+      <div class="content-card">
+        <div class="card-label">Week ${w.num} Deliverables</div>
+        ${w.deliverables}
+      </div>
+    </div>
+    <div class="nav-arrows">
+      <button class="nav-btn" onclick="goTo(${current-1})" ${current===1?'disabled':''}>&#x2190; Previous</button>
+      ${current < weeks.length
+        ? `<button class="nav-btn primary" onclick="goTo(${current+1})">Next Week &#x2192;</button>`
+        : `<button class="nav-btn primary" onclick="goTo(0)">&#x2713; Wrap Up &amp; Overview</button>`
+      }
+    </div>`;
+}
+
+function goTo(n) {
+  current = n;
+  const total = weeks.length;
+  const pct = current === 0 ? 0 : Math.round((current / total) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('weekCounter').textContent = current === 0 ? 'Overview' : `Week ${current} / ${total}`;
+  document.getElementById('slideContent').innerHTML = current === 0 ? renderIntro() : renderWeek(weeks[current-1]);
+  // dots
+  const dots = document.querySelectorAll('.dot');
+  dots.forEach((d,i) => d.classList.toggle('active', i+1 === current));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// Build dots
+const dotsEl = document.getElementById('weekDots');
+weeks.forEach((w,i) => {
+  const d = document.createElement('div');
+  d.className = 'dot';
+  d.textContent = i+1;
+  d.title = w.title;
+  d.onclick = () => goTo(i+1);
+  dotsEl.appendChild(d);
+});
+
+// Init
+goTo(0);
+</script>
+</body></html>
