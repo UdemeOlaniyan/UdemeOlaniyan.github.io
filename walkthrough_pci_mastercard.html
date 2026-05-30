@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mastercard PCI DSS Compliance — Walkthrough</title>
+<title>Payment Network PCI DSS Compliance — Walkthrough</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
   :root {
@@ -161,8 +161,8 @@
   <div class="topbar-left">
     <a href="index.html" class="back-btn">&#x2190; Portfolio</a>
     <div>
-      <div class="topbar-title">Mastercard PCI DSS Compliance</div>
-      <div class="topbar-sub">PCI DSS v4.0 &middot; Mastercard Global</div>
+      <div class="topbar-title">Payment Network PCI DSS Compliance</div>
+      <div class="topbar-sub">PCI DSS v4.0 &middot; Global Payment Network Provider</div>
     </div>
   </div>
   <div class="week-counter" id="weekCounter">Overview</div>
@@ -179,30 +179,30 @@
 <div class="week-dots" id="weekDots"></div>
 
 <script>
-const TITLE = 'Mastercard PCI DSS Compliance';
-const SUBTITLE = "Securing Mastercard's card network, authorization APIs, and tokenization platform to PCI DSS standards";
+const TITLE = 'Payment Network PCI DSS Compliance';
+const SUBTITLE = "Securing a global payment network, authorization APIs, and tokenization platform to PCI DSS standards";
 const FRAMEWORK = 'PCI DSS v4.0';
-const COMPANY = 'Mastercard Global';
+const COMPANY = 'Global Payment Network Provider';
 const SECTOR = 'Financial Services';
 
 const weeks = [{
   num: 1,
   title: 'Governance & CDE Scoping',
-  goal: "Define Mastercard's Cardholder Data Environment (CDE) and compliance ownership.",
-  tasks: `<li>Use PCI DSS Scoping Guide to define Mastercard's CDE components: authorization & switching systems, network APIs, tokenization & cryptographic services</li><li>Exclude non-CDE systems: HR, marketing, analytics, corporate IT</li><li>Create CHD data flow diagram: Merchant → Acquirer → Mastercard Network → Issuer, highlighting encryption points and tokenization boundaries</li><li>Segment systems: core network processing, token vaults, API gateways — prevent lateral movement from non-CDE</li><li>Document PCI DSS Role Matrix: Network Security Engineer, Cryptography Lead, PCI Compliance Manager, IR Coordinator</li>`,
-  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Mastercard CDE Diagram</div><div class="deliverable"><span class="check">&#x2705;</span>PCI DSS Scoping Summary</div><div class="deliverable"><span class="check">&#x2705;</span>Roles & Responsibility Matrix</div>`
+  goal: "Define the organization's Cardholder Data Environment (CDE) and compliance ownership.",
+  tasks: `<li>Use PCI DSS Scoping Guide to define the organization's CDE components: authorization & switching systems, network APIs, tokenization & cryptographic services</li><li>Exclude non-CDE systems: HR, marketing, analytics, corporate IT</li><li>Create CHD data flow diagram: Merchant → Acquirer → a global payment network provider Network → Issuer, highlighting encryption points and tokenization boundaries</li><li>Segment systems: core network processing, token vaults, API gateways — prevent lateral movement from non-CDE</li><li>Document PCI DSS Role Matrix: Network Security Engineer, Cryptography Lead, PCI Compliance Manager, IR Coordinator</li>`,
+  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>a global payment network provider CDE Diagram</div><div class="deliverable"><span class="check">&#x2705;</span>PCI DSS Scoping Summary</div><div class="deliverable"><span class="check">&#x2705;</span>Roles & Responsibility Matrix</div>`
 },
 {
   num: 2,
   title: 'Gap Analysis & Risk Assessment',
-  goal: "Identify PCI DSS gaps across Mastercard's network and APIs.",
+  goal: "Identify PCI DSS gaps across the organization's network and APIs.",
   tasks: `<li>Perform gap assessment using PCI DSS Gap Assessment Template: network encryption, API auth, tokenization lifecycle, key management (HSM)</li><li>Categorize risks: Unencrypted CHD transmission → High; Weak API authentication → High; Incomplete token lifecycle tracking → Medium</li><li>Review existing policies: cryptographic key management, API security standards, network segmentation documentation</li><li>Draft remediation plan: AES-256 encryption, mutual TLS for APIs, key rotation policies</li><li>Document residual risk and assign remediation owners with target dates</li>`,
   deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>PCI DSS Gap Analysis Table</div><div class="deliverable"><span class="check">&#x2705;</span>Risk Register</div><div class="deliverable"><span class="check">&#x2705;</span>Draft Remediation Action Plan</div>`
 },
 {
   num: 3,
   title: 'Technical Control Implementation',
-  goal: 'Secure Mastercard APIs, networks, and tokenization services.',
+  goal: 'Secure a global payment network provider APIs, networks, and tokenization services.',
   tasks: `<li>Harden API security: enforce mTLS (mutual TLS), OAuth 2.0 / API certificates, rate limiting & anomaly detection</li><li>Implement tokenization controls: real-time PAN tokenization, irreversible token design, secure HSM-protected token vaults</li><li>Configure network firewalls: restrict access to trusted partners, isolate tokenization systems, validate segmentation per PCI DSS</li><li>Validate system configurations using PCI DSS Evidence Checklist</li><li>Document all configuration changes with before/after evidence screenshots</li>`,
   deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>API Security Configuration Sheet</div><div class="deliverable"><span class="check">&#x2705;</span>Tokenization Architecture Overview</div><div class="deliverable"><span class="check">&#x2705;</span>Updated Network Firewall Rules Documentation</div>`
 },
@@ -216,15 +216,15 @@ const weeks = [{
 {
   num: 5,
   title: 'Security Testing & Incident Response',
-  goal: 'Validate controls and prepare Mastercard for security incidents.',
+  goal: 'Validate controls and prepare a global payment network provider for security incidents.',
   tasks: `<li>Simulate penetration test against network APIs and token services (Burp Suite, API security scanners): test authentication bypass, token leakage, improper error handling</li><li>Develop Incident Response Plan: detection & alerting, network isolation, card brand notification, regulatory reporting</li><li>Run incident simulation: Compromised API credentials used to access tokenization service — walk through Detection → Containment → Communication → Recovery</li><li>Document lessons learned and update IR procedures based on simulation findings</li><li>Review PCI DSS Requirement 12.10 incident response plan obligations</li>`,
   deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Pen Test Summary Report</div><div class="deliverable"><span class="check">&#x2705;</span>Incident Response Plan (PCI-aligned)</div><div class="deliverable"><span class="check">&#x2705;</span>Incident Simulation After-Action Report</div>`
 },
 {
   num: 6,
   title: 'Final Validation & QSA Readiness',
-  goal: 'Prepare Mastercard for PCI DSS QSA (Qualified Security Assessor) assessment.',
-  tasks: `<li>Validate closure of all Week 2 gaps: confirm encryption, tokenization controls, access logging all operational</li><li>Compile QSA Evidence Binder: API security configs, tokenization logic documentation, HSM & encryption evidence, log samples, updated IRP & policies</li><li>Organize documentation by PCI DSS requirement, system component, and control owner</li><li>Produce Final PCI Compliance Checklist covering all applicable requirements</li><li>Write Executive Summary Report for Mastercard leadership: compliance journey, control highlights, residual risks, and continuous compliance roadmap</li>`,
+  goal: 'Prepare a global payment network provider for PCI DSS QSA (Qualified Security Assessor) assessment.',
+  tasks: `<li>Validate closure of all Week 2 gaps: confirm encryption, tokenization controls, access logging all operational</li><li>Compile QSA Evidence Binder: API security configs, tokenization logic documentation, HSM & encryption evidence, log samples, updated IRP & policies</li><li>Organize documentation by PCI DSS requirement, system component, and control owner</li><li>Produce Final PCI Compliance Checklist covering all applicable requirements</li><li>Write Executive Summary Report for a global payment network provider leadership: compliance journey, control highlights, residual risks, and continuous compliance roadmap</li>`,
   deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Final PCI DSS Compliance Checklist</div><div class="deliverable"><span class="check">&#x2705;</span>QSA Evidence Binder Index</div><div class="deliverable"><span class="check">&#x2705;</span>Executive Summary Report</div>`
 }];
 
