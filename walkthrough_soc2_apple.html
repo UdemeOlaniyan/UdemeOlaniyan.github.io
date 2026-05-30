@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Apple SOC 2 Readiness — Walkthrough</title>
+<title>Tech Sector SOC 2 Readiness — Walkthrough</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
   :root {
@@ -161,8 +161,8 @@
   <div class="topbar-left">
     <a href="index.html" class="back-btn">&#x2190; Portfolio</a>
     <div>
-      <div class="topbar-title">Apple SOC 2 Readiness</div>
-      <div class="topbar-sub">AICPA SOC 2 TSC &middot; Apple Inc.</div>
+      <div class="topbar-title">Tech Sector SOC 2 Readiness</div>
+      <div class="topbar-sub">AICPA SOC 2 TSC &middot; A Global Technology Company</div>
     </div>
   </div>
   <div class="week-counter" id="weekCounter">Overview</div>
@@ -179,38 +179,38 @@
 <div class="week-dots" id="weekDots"></div>
 
 <script>
-const TITLE = 'Apple SOC 2 Readiness';
-const SUBTITLE = 'Evaluating Apple ID, iCloud, App Store Connect & Developer APIs against AICPA Trust Services Criteria';
+const TITLE = 'Tech Sector SOC 2 Readiness';
+const SUBTITLE = 'Evaluating a cloud identity platform, a cloud storage platform, an app distribution platform & Developer APIs against AICPA Trust Services Criteria';
 const FRAMEWORK = 'AICPA SOC 2 TSC';
-const COMPANY = 'Apple Inc.';
+const COMPANY = 'A Global Technology Company';
 const SECTOR = 'Global Technology';
 
 const weeks = [{
   num: 1,
   title: 'Scoping & Governance',
-  goal: "Define Apple's SOC 2 audit scope and governance structure.",
-  tasks: `<li>Identify Apple services in SOC 2 scope: Apple ID & IAM, iCloud Storage & Backup, App Store Connect, Developer APIs & Integrations</li><li>Define system boundaries: Security (IAM, encryption, access controls), Availability (uptime, redundancy, IR), Confidentiality (user data, backups, metadata)</li><li>Create RACI Matrix: Cloud Security Engineer, Identity & Access Architect, Privacy & Legal Officer, GRC & Audit Lead</li><li>Document Apple's Shared Responsibility Model: Apple responsibilities vs. developers/users</li><li>Establish audit timeline and evidence collection plan</li>`,
+  goal: "Define the organization's SOC 2 audit scope and governance structure.",
+  tasks: `<li>Identify cloud services in SOC 2 scope: a cloud identity platform & IAM, cloud storage & Backup, an app distribution platform, Developer APIs & Integrations</li><li>Define system boundaries: Security (IAM, encryption, access controls), Availability (uptime, redundancy, IR), Confidentiality (user data, backups, metadata)</li><li>Create RACI Matrix: Cloud Security Engineer, Identity & Access Architect, Privacy & Legal Officer, GRC & Audit Lead</li><li>Document the organization's Shared Responsibility Model: the organization responsibilities vs. developers/users</li><li>Establish audit timeline and evidence collection plan</li>`,
   deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>SOC 2 Scope Summary Document</div><div class="deliverable"><span class="check">&#x2705;</span>Shared Responsibility Model Diagram</div><div class="deliverable"><span class="check">&#x2705;</span>Project RACI Chart</div>`
 },
 {
   num: 2,
   title: 'Risk Assessment & Control Mapping',
   goal: 'Identify risks and map controls to SOC 2 Trust Service Criteria.',
-  tasks: `<li>Perform SOC 2-aligned Risk Assessment across Apple's cloud services</li><li>Identify risks: Unauthorized Apple ID access → Confidentiality; API token misuse → Security; iCloud outage → Availability</li><li>Map Apple controls to TSC: Apple ID MFA → CC6.1, CC6.6; End-to-end encryption → CC6.1, C1.2; Global redundancy → A1.1, A1.2</li><li>Build initial Control Register with control owners and implementation status</li><li>Assign risk ratings (High/Medium/Low) and document risk treatment decisions</li>`,
+  tasks: `<li>Perform SOC 2-aligned Risk Assessment across the organization's cloud services</li><li>Identify risks: Unauthorized a cloud identity platform access → Confidentiality; API token misuse → Security; a cloud storage platform outage → Availability</li><li>Map the organization controls to TSC: a cloud identity platform MFA → CC6.1, CC6.6; End-to-end encryption → CC6.1, C1.2; Global redundancy → A1.1, A1.2</li><li>Build initial Control Register with control owners and implementation status</li><li>Assign risk ratings (High/Medium/Low) and document risk treatment decisions</li>`,
   deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Risk Register (SOC 2-aligned)</div><div class="deliverable"><span class="check">&#x2705;</span>TSC Control Mapping Matrix</div><div class="deliverable"><span class="check">&#x2705;</span>Initial Control Register</div>`
 },
 {
   num: 3,
   title: 'Policies & Cloud Control Design',
-  goal: "Document Apple's SOC 2 control environment through enterprise-grade policies.",
-  tasks: `<li>Draft Access Control Policy: MFA for all privileged Apple ID accounts, RBAC enforcement</li><li>Draft Encryption & Key Management Policy: iCloud data at rest and in transit, HSM usage</li><li>Draft Data Retention & Confidentiality Policy: user data handling, metadata controls</li><li>Design control implementation examples: restrict API scopes using least privilege, enforce TLS 1.3</li><li>Begin evidence collection: screenshots, configuration exports, audit reports</li>`,
+  goal: "Document the organization's SOC 2 control environment through enterprise-grade policies.",
+  tasks: `<li>Draft Access Control Policy: MFA for all privileged a cloud identity platform accounts, RBAC enforcement</li><li>Draft Encryption & Key Management Policy: a cloud storage platform data at rest and in transit, HSM usage</li><li>Draft Data Retention & Confidentiality Policy: user data handling, metadata controls</li><li>Design control implementation examples: restrict API scopes using least privilege, enforce TLS 1.3</li><li>Begin evidence collection: screenshots, configuration exports, audit reports</li>`,
   deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>SOC 2 Policy Pack (3 enterprise policies)</div><div class="deliverable"><span class="check">&#x2705;</span>Control Design Sheet</div><div class="deliverable"><span class="check">&#x2705;</span>Control Implementation Matrix</div>`
 },
 {
   num: 4,
   title: 'Monitoring, Logging & Alerting',
-  goal: 'Establish continuous monitoring and incident awareness across Apple services.',
-  tasks: `<li>Monitor Apple ID authentication logs and iCloud access/download activity</li><li>Track Developer API usage patterns and anomalies</li><li>Configure alerts for: multiple failed login attempts, suspicious API behavior, unexpected service degradation</li><li>Simulate escalation workflow: Alert → Security Operations → GRC → Executive Review</li><li>Build Evidence Binder: log samples, alert screenshots, escalation records</li>`,
+  goal: 'Establish continuous monitoring and incident awareness across cloud services.',
+  tasks: `<li>Monitor a cloud identity platform authentication logs and a cloud storage platform access/download activity</li><li>Track Developer API usage patterns and anomalies</li><li>Configure alerts for: multiple failed login attempts, suspicious API behavior, unexpected service degradation</li><li>Simulate escalation workflow: Alert → Security Operations → GRC → Executive Review</li><li>Build Evidence Binder: log samples, alert screenshots, escalation records</li>`,
   deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Monitoring Checklist</div><div class="deliverable"><span class="check">&#x2705;</span>Sample Alert & Escalation Logs</div><div class="deliverable"><span class="check">&#x2705;</span>Evidence Binder (Logs & Reports)</div>`
 },
 {
@@ -223,8 +223,8 @@ const weeks = [{
 {
   num: 6,
   title: 'Final Reporting & Executive Briefing',
-  goal: "Deliver Apple's SOC 2 readiness package and executive presentation.",
-  tasks: `<li>Finalize SOC 2 Readiness Report: risk overview, controls implemented, gaps remediated</li><li>Create Executive Presentation: SOC 2 journey, control highlights, continuous compliance roadmap</li><li>Summarize findings: overall readiness percentage, open items, recommended next steps</li><li>Submit final internship portfolio with all deliverables organized by week</li><li>Present to simulated Apple GRC leadership panel</li>`,
+  goal: "Deliver the organization's SOC 2 readiness package and executive presentation.",
+  tasks: `<li>Finalize SOC 2 Readiness Report: risk overview, controls implemented, gaps remediated</li><li>Create Executive Presentation: SOC 2 journey, control highlights, continuous compliance roadmap</li><li>Summarize findings: overall readiness percentage, open items, recommended next steps</li><li>Submit final internship portfolio with all deliverables organized by week</li><li>Present to simulated the organization GRC leadership panel</li>`,
   deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Final SOC 2 Readiness Report</div><div class="deliverable"><span class="check">&#x2705;</span>Executive Presentation Deck (5 slides)</div><div class="deliverable"><span class="check">&#x2705;</span>Project Portfolio Folder (complete)</div>`
 }];
 
