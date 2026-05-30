@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TPRM — Johns Hopkins & Target — Walkthrough</title>
+<title>TPRM — A Major Healthcare Organization & a national retail corporation — Walkthrough</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
   :root {
@@ -161,8 +161,8 @@
   <div class="topbar-left">
     <a href="index.html" class="back-btn">&#x2190; Portfolio</a>
     <div>
-      <div class="topbar-title">TPRM — Johns Hopkins & Target</div>
-      <div class="topbar-sub">TPRM / HIPAA / PCI DSS &middot; Johns Hopkins Hospital & Target</div>
+      <div class="topbar-title">TPRM — A Major Healthcare Organization & a national retail corporation</div>
+      <div class="topbar-sub">TPRM / HIPAA / PCI DSS &middot; A Major Healthcare Organization & a national retail corporation</div>
     </div>
   </div>
   <div class="week-counter" id="weekCounter">Overview</div>
@@ -179,53 +179,53 @@
 <div class="week-dots" id="weekDots"></div>
 
 <script>
-const TITLE = 'TPRM — Johns Hopkins & Target';
+const TITLE = 'TPRM — A Major Healthcare Organization & a national retail corporation';
 const SUBTITLE = 'Third-Party Risk Management across healthcare (HIPAA/HITRUST) and retail (PCI DSS/ISO 27001) vendor ecosystems';
 const FRAMEWORK = 'TPRM / HIPAA / PCI DSS';
-const COMPANY = 'Johns Hopkins Hospital & Target';
+const COMPANY = 'A Major Healthcare Organization & a national retail corporation';
 const SECTOR = 'Healthcare & Retail';
 
 const weeks = [{
   num: 1,
   title: 'Initiation — Understanding the Vendor Ecosystems',
-  goal: 'Define the scope and vendor landscape for both Johns Hopkins Hospital and Target.',
-  tasks: `<li>Johns Hopkins: Review HIPAA Privacy & Security Rule obligations, patient safety priorities, and vendor management policies. Identify 10 strategic healthcare vendors (Epic EHR, AWS/Azure, medical device vendors, telehealth platforms, revenue cycle vendors)</li><li>Target: Review Vendor Code of Conduct, PCI DSS compliance objectives, GDPR/CCPA obligations. Identify 10 strategic vendors (cloud providers, POS systems, payment processors, logistics partners, marketing platforms)</li><li>Map regulatory obligations: Johns Hopkins → HIPAA, HITECH, HITRUST, NIST 800-53; Target → PCI DSS, GDPR, CCPA, ISO 27001</li><li>Identify internal stakeholders for both organizations: Information Security, Compliance, IT, Clinical Ops (Hopkins) / Procurement, Supply Chain (Target)</li><li>Document vendor inventory spreadsheets and stakeholder/regulatory summaries for both organizations</li>`,
-  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Vendor Inventory Spreadsheet — Johns Hopkins (10 vendors)</div><div class="deliverable"><span class="check">&#x2705;</span>Vendor Inventory Spreadsheet — Target (10 vendors)</div><div class="deliverable"><span class="check">&#x2705;</span>Stakeholder & Regulatory Summary (both organizations)</div>`
+  goal: 'Define the scope and vendor landscape for both A Major Healthcare Organization and a national retail corporation.',
+  tasks: `<li>A Major Healthcare Organization: Review HIPAA Privacy & Security Rule obligations, patient safety priorities, and vendor management policies. Identify 10 strategic healthcare vendors (Epic EHR, AWS/Azure, medical device vendors, telehealth platforms, revenue cycle vendors)</li><li>a national retail corporation: Review Vendor Code of Conduct, PCI DSS compliance objectives, GDPR/CCPA obligations. Identify 10 strategic vendors (cloud providers, POS systems, payment processors, logistics partners, marketing platforms)</li><li>Map regulatory obligations: A Major Healthcare Organization → HIPAA, HITECH, HITRUST, NIST 800-53; a national retail corporation → PCI DSS, GDPR, CCPA, ISO 27001</li><li>Identify internal stakeholders for both organizations: Information Security, Compliance, IT, Clinical Ops (Hopkins) / Procurement, Supply Chain (a national retail corporation)</li><li>Document vendor inventory spreadsheets and stakeholder/regulatory summaries for both organizations</li>`,
+  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Vendor Inventory Spreadsheet — A Major Healthcare Organization (10 vendors)</div><div class="deliverable"><span class="check">&#x2705;</span>Vendor Inventory Spreadsheet — a national retail corporation (10 vendors)</div><div class="deliverable"><span class="check">&#x2705;</span>Stakeholder & Regulatory Summary (both organizations)</div>`
 },
 {
   num: 2,
   title: 'Planning — Scope, Roles & Vendor Prioritization',
   goal: 'Define assessment scope, build RACI charts, and classify vendors by risk.',
-  tasks: `<li>Create TPRM Project Charter for Johns Hopkins: scope healthcare vendors handling ePHI, clinical systems, cloud platforms, medical devices</li><li>Create TPRM Project Charter for Target: scope payment, logistics, SaaS, and marketing vendors across retail supply chain</li><li>Classify vendors by risk tier — Johns Hopkins: High (EHR, cloud, billing), Medium (medical devices, labs), Low (non-IT vendors); Target: High (payment processors), Medium (logistics), Low (marketing)</li><li>Map vendor types to compliance frameworks: Hopkins vendors → HIPAA/HITRUST/NIST; Target vendors → PCI DSS/ISO 27001/NIST</li><li>Build RACI charts for both organizations covering GRC, Compliance, IT, Procurement, and operational teams</li>`,
-  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Project Charter — Johns Hopkins Hospital TPRM</div><div class="deliverable"><span class="check">&#x2705;</span>Project Charter — Target TPRM</div><div class="deliverable"><span class="check">&#x2705;</span>Vendor Criticality Matrix (both organizations)</div><div class="deliverable"><span class="check">&#x2705;</span>RACI Charts (both organizations)</div>`
+  tasks: `<li>Create TPRM Project Charter for A Major Healthcare Organization: scope healthcare vendors handling ePHI, clinical systems, cloud platforms, medical devices</li><li>Create TPRM Project Charter for a national retail corporation: scope payment, logistics, SaaS, and marketing vendors across retail supply chain</li><li>Classify vendors by risk tier — A Major Healthcare Organization: High (EHR, cloud, billing), Medium (medical devices, labs), Low (non-IT vendors); a national retail corporation: High (payment processors), Medium (logistics), Low (marketing)</li><li>Map vendor types to compliance frameworks: Hopkins vendors → HIPAA/HITRUST/NIST; a national retail corporation vendors → PCI DSS/ISO 27001/NIST</li><li>Build RACI charts for both organizations covering GRC, Compliance, IT, Procurement, and operational teams</li>`,
+  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Project Charter — A Major Healthcare Organization TPRM</div><div class="deliverable"><span class="check">&#x2705;</span>Project Charter — Retail Organization TPRM</div><div class="deliverable"><span class="check">&#x2705;</span>Vendor Criticality Matrix (both organizations)</div><div class="deliverable"><span class="check">&#x2705;</span>RACI Charts (both organizations)</div>`
 },
 {
   num: 3,
   title: 'Execution Part 1 — Due Diligence Assessments',
   goal: 'Perform healthcare and retail-specific vendor risk assessments.',
-  tasks: `<li>Develop Johns Hopkins Healthcare Vendor Questionnaire: HIPAA safeguards, ePHI encryption, breach notification timelines, MFA controls, medical device security, BAA status</li><li>Develop Target Retail Vendor Questionnaire: PCI DSS controls, cloud security posture, incident response, payment data handling, cardholder data access controls</li><li>Simulate vendor responses from: Hopkins (cloud hosting vendor, medical device manufacturer, billing vendor); Target (payment gateway, cloud SaaS partner, logistics provider)</li><li>Review compliance evidence: Hopkins (SOC 2 Type II, HITRUST certification, BAAs); Target (PCI Attestation of Compliance, SOC 2, ISO certificates)</li><li>Score vendors using risk matrices aligned to each organization's priorities</li>`,
+  tasks: `<li>Develop A Major Healthcare Organization Healthcare Vendor Questionnaire: HIPAA safeguards, ePHI encryption, breach notification timelines, MFA controls, medical device security, BAA status</li><li>Develop a national retail corporation Retail Vendor Questionnaire: PCI DSS controls, cloud security posture, incident response, payment data handling, cardholder data access controls</li><li>Simulate vendor responses from: Hopkins (cloud hosting vendor, medical device manufacturer, billing vendor); a national retail corporation (payment gateway, cloud SaaS partner, logistics provider)</li><li>Review compliance evidence: Hopkins (SOC 2 Type II, HITRUST certification, BAAs); a national retail corporation (PCI Attestation of Compliance, SOC 2, ISO certificates)</li><li>Score vendors using risk matrices aligned to each organization's priorities</li>`,
   deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Due Diligence Checklist — Healthcare (HIPAA-aligned)</div><div class="deliverable"><span class="check">&#x2705;</span>Due Diligence Checklist — Retail (PCI DSS-aligned)</div><div class="deliverable"><span class="check">&#x2705;</span>Simulated Vendor Responses (3 per organization)</div><div class="deliverable"><span class="check">&#x2705;</span>Vendor Risk Scoring Tables (both organizations)</div>`
 },
 {
   num: 4,
   title: 'Execution Part 2 — Remediation Planning',
   goal: 'Address high-risk vendor findings with concrete remediation strategies.',
-  tasks: `<li>Johns Hopkins — Select 2 high-risk vendors: cloud vendor lacking encryption at rest; medical device vendor without documented IR plan. Recommend controls: MFA, ePHI encryption, annual HIPAA risk assessments, enhanced logging</li><li>Target — Select 2 high-risk vendors: logistics partner lacking IR plan; payment vendor missing MFA. Recommend controls: data encryption, PCI DSS segmentation, MFA for vendor portals, stricter audit cycles</li><li>Define risk treatment for each vendor: Mitigate, Transfer, Accept, or Avoid with justification</li><li>Build 30–60 day remediation timelines for all high-risk findings</li><li>Document contractual remediation requirements and escalation procedures</li>`,
-  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Remediation Plan — Johns Hopkins (2 vendors)</div><div class="deliverable"><span class="check">&#x2705;</span>Remediation Plan — Target (2 vendors)</div><div class="deliverable"><span class="check">&#x2705;</span>Risk Treatment Worksheets (both organizations)</div><div class="deliverable"><span class="check">&#x2705;</span>Remediation Timelines (30-60 day)</div>`
+  tasks: `<li>A Major Healthcare Organization — Select 2 high-risk vendors: cloud vendor lacking encryption at rest; medical device vendor without documented IR plan. Recommend controls: MFA, ePHI encryption, annual HIPAA risk assessments, enhanced logging</li><li>a national retail corporation — Select 2 high-risk vendors: logistics partner lacking IR plan; payment vendor missing MFA. Recommend controls: data encryption, PCI DSS segmentation, MFA for vendor portals, stricter audit cycles</li><li>Define risk treatment for each vendor: Mitigate, Transfer, Accept, or Avoid with justification</li><li>Build 30–60 day remediation timelines for all high-risk findings</li><li>Document contractual remediation requirements and escalation procedures</li>`,
+  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Remediation Plan — A Major Healthcare Organization (2 vendors)</div><div class="deliverable"><span class="check">&#x2705;</span>Remediation Plan — a national retail corporation (2 vendors)</div><div class="deliverable"><span class="check">&#x2705;</span>Risk Treatment Worksheets (both organizations)</div><div class="deliverable"><span class="check">&#x2705;</span>Remediation Timelines (30-60 day)</div>`
 },
 {
   num: 5,
   title: 'Monitoring & Ongoing Vendor Oversight',
   goal: 'Establish continuous compliance tracking and vendor performance oversight.',
-  tasks: `<li>Build Johns Hopkins Healthcare Compliance Tracker: HIPAA risk assessment dates, SOC 2/HITRUST renewals, BAA expiration dates, patient safety incident log</li><li>Build Target Compliance Tracker: PCI DSS renewal dates, SOC 2 report status, logistics vendor certifications, SLA performance metrics</li><li>Design TPRM KPI Dashboard for each organization: % vendors compliant, high-risk vendors open, overdue remediation items, average resolution time</li><li>Review vendor contracts for both organizations: breach notification timelines, data ownership clauses, right-to-audit, SLA penalties</li><li>Recommend contract improvements for both organizations based on identified gaps</li>`,
-  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>KPI Dashboard — Johns Hopkins TPRM</div><div class="deliverable"><span class="check">&#x2705;</span>KPI Dashboard — Target TPRM</div><div class="deliverable"><span class="check">&#x2705;</span>Compliance Trackers (both organizations)</div><div class="deliverable"><span class="check">&#x2705;</span>Contract Improvement Reports (both organizations)</div>`
+  tasks: `<li>Build A Major Healthcare Organization Healthcare Compliance Tracker: HIPAA risk assessment dates, SOC 2/HITRUST renewals, BAA expiration dates, patient safety incident log</li><li>Build a national retail corporation Compliance Tracker: PCI DSS renewal dates, SOC 2 report status, logistics vendor certifications, SLA performance metrics</li><li>Design TPRM KPI Dashboard for each organization: % vendors compliant, high-risk vendors open, overdue remediation items, average resolution time</li><li>Review vendor contracts for both organizations: breach notification timelines, data ownership clauses, right-to-audit, SLA penalties</li><li>Recommend contract improvements for both organizations based on identified gaps</li>`,
+  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>KPI Dashboard — A Major Healthcare Organization TPRM</div><div class="deliverable"><span class="check">&#x2705;</span>KPI Dashboard — Retail Organization TPRM</div><div class="deliverable"><span class="check">&#x2705;</span>Compliance Trackers (both organizations)</div><div class="deliverable"><span class="check">&#x2705;</span>Contract Improvement Reports (both organizations)</div>`
 },
 {
   num: 6,
   title: 'Closure — Executive Presentations & Lessons Learned',
   goal: 'Present findings to hospital and retail leadership; document lessons learned.',
-  tasks: `<li>Write Final TPRM Report for Johns Hopkins: vendor risks identified, HIPAA gaps, remediation status, recommendations for ongoing program maturity</li><li>Write Final TPRM Report for Target: vendor risks, PCI DSS supply chain gaps, remediation status, recommendations</li><li>Prepare 5-slide executive presentations for each organization: risk summary, compliance posture, top findings, remediation roadmap, program improvements</li><li>Recommend process improvements: stronger vendor onboarding workflows, automated monitoring tools (Eramba, Archer), secure vendor offboarding procedures</li><li>Reflect on cross-sector lessons: differences in healthcare (patient safety focus) vs. retail (PCI DSS, supply chain scale) TPRM approaches</li>`,
-  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Final TPRM Report — Johns Hopkins Hospital</div><div class="deliverable"><span class="check">&#x2705;</span>Final TPRM Report — Target</div><div class="deliverable"><span class="check">&#x2705;</span>Executive Presentation Decks (both organizations)</div><div class="deliverable"><span class="check">&#x2705;</span>Vendor Risk Improvement Checklists (both organizations)</div>`
+  tasks: `<li>Write Final TPRM Report for A Major Healthcare Organization: vendor risks identified, HIPAA gaps, remediation status, recommendations for ongoing program maturity</li><li>Write Final TPRM Report for a national retail corporation: vendor risks, PCI DSS supply chain gaps, remediation status, recommendations</li><li>Prepare 5-slide executive presentations for each organization: risk summary, compliance posture, top findings, remediation roadmap, program improvements</li><li>Recommend process improvements: stronger vendor onboarding workflows, automated monitoring tools (Eramba, Archer), secure vendor offboarding procedures</li><li>Reflect on cross-sector lessons: differences in healthcare (patient safety focus) vs. retail (PCI DSS, supply chain scale) TPRM approaches</li>`,
+  deliverables: `<div class="deliverable"><span class="check">&#x2705;</span>Final TPRM Report — A Major Healthcare Organization</div><div class="deliverable"><span class="check">&#x2705;</span>Final TPRM Report — a national retail corporation</div><div class="deliverable"><span class="check">&#x2705;</span>Executive Presentation Decks (both organizations)</div><div class="deliverable"><span class="check">&#x2705;</span>Vendor Risk Improvement Checklists (both organizations)</div>`
 }];
 
 let current = 0; // 0 = intro, 1–6 = weeks
